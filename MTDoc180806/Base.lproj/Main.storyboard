@@ -85,7 +85,7 @@
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Unx-hb-AZx">
-                                <rect key="frame" x="16" y="748" width="359" height="30"/>
+                                <rect key="frame" x="16" y="748" width="300" height="30"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6po-Wt-zNs">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
@@ -94,10 +94,13 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES"/>
+                                        <connections>
+                                            <action selector="inputTFReturnKeyAction:" destination="LHf-ga-ubx" eventType="primaryActionTriggered" id="Hzh-xR-Nh6"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43Q-gL-xaO">
-                                        <rect key="frame" x="300" y="0.0" width="59" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="43Q-gL-xaO">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                         <state key="normal" title="Send"/>
                                         <connections>
                                             <action selector="SendAction:" destination="LHf-ga-ubx" eventType="touchUpInside" id="VWq-6F-7fA"/>
@@ -114,7 +117,6 @@
                             <constraint firstItem="Unx-hb-AZx" firstAttribute="top" secondItem="u9O-MV-qXZ" secondAttribute="bottom" constant="6" id="W6z-QS-BGA"/>
                             <constraint firstItem="Unx-hb-AZx" firstAttribute="leading" secondItem="RRl-2C-EtQ" secondAttribute="leading" constant="16" id="qBK-wM-5fJ"/>
                             <constraint firstItem="u9O-MV-qXZ" firstAttribute="leading" secondItem="RRl-2C-EtQ" secondAttribute="leading" id="sHS-Wp-FgS"/>
-                            <constraint firstItem="RRl-2C-EtQ" firstAttribute="trailing" secondItem="Unx-hb-AZx" secondAttribute="trailing" id="ti5-ME-mzg"/>
                             <constraint firstItem="u9O-MV-qXZ" firstAttribute="trailing" secondItem="RRl-2C-EtQ" secondAttribute="trailing" id="uFP-kA-AcP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RRl-2C-EtQ"/>

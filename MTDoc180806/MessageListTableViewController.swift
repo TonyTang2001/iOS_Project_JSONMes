@@ -24,10 +24,9 @@ struct StdMes: Decodable {
 
 class MessageListTableViewController: UITableViewController {
     
-    var message = [StdMes]()
+//    var message = [StdMes]()
     var messagenum = 0
-    
-    private var messages = [StdMes]()
+    var messages = [StdMes]()
     
     @IBOutlet var listtableView: UITableView!
     
@@ -43,9 +42,10 @@ class MessageListTableViewController: UITableViewController {
     }()
     
     @objc func loadDataR(){
-        viewDidLoad()
-//        loadData()
-//        print("Refresh Action to loadData()")
+//        viewDidLoad()
+        parsingJSON()
+        tableView.reloadData()
+        
         let deadline = DispatchTime.now() + .milliseconds(600)
         DispatchQueue.main.asyncAfter(deadline: deadline) {
             self.refresher.endRefreshing()
@@ -54,24 +54,21 @@ class MessageListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let path = Bundle.main.path(forResource: "std", ofType: "json")
+//        let url = URL(fileURLWithPath: path!)
+        parsingJSON()
         tableView.reloadData()
         
         tableView.refreshControl = refresher
-        
-//        loadDataR()
-//        let path = Bundle.main.path(forResource: "std", ofType: "json")
-//        let url = URL(fileURLWithPath: path!)
-
-        let jsonUrlString = "http://.../"
-        guard let url = URL(string: jsonUrlString) else { return }
-        
-        parsingJSON(withUrl: url)
-        
     }
 
-    func parsingJSON(withUrl: URL) {
-            
-            URLSession.shared.dataTask(with: withUrl) { (data, response, err) in
+    func parsingJSON() {
+        
+        let jsonUrlString = "http://39.104.90.230/webChat/data/store.json"
+        guard let url = URL(string: jsonUrlString) else { return }
+        
+            URLSession.shared.dataTask(with: url) { (data, response, err) in
                 guard let data = data else { return }
                 do {
                     let webChat = try JSONDecoder().decode(WebChat.self, from: data)
@@ -98,6 +95,7 @@ class MessageListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        messagenum = messages.count
         return messages.count
     }
 
@@ -105,9 +103,10 @@ class MessageListTableViewController: UITableViewController {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageCell else { return UITableViewCell()}
         
-        print(indexPath.row)
+//        print(indexPath.row)
         let index = indexPath.row
         print(messages[index].content)
+        print(messages[index].time)
         cell.bodyLabel.text = messages[index].content
         cell.timeLabel.text = timeFromIntToString(with: messages[index].date, And: messages[index].time)
         cell.fromToLabel.text = fromAToB(with: messages[index].from, to: messages[index].to)
@@ -138,20 +137,24 @@ class MessageListTableViewController: UITableViewController {
 //        let nowsecondString = String(calendar.component(.second, from: dateToday))
         
         //get hour&minute for Message as String
-        let mesHourString = String(timeInt/10000)
-        let mesMinuteString = String(timeInt/100-100*(timeInt/10000))
+        var mesHourString = String(timeInt/10000)
+        var mesMinuteString = String(timeInt/100-100*(timeInt/10000))
         //        let mesSecondString = String(timeInt%100)
         
         let nowTimeHMString = nowHourString + nowMinuteString
         let messageTimeHMString = String(timeInt/100)
         
         var timeString : String
+        //Time: 0X:XX
         if (timeInt/100000) == 0 {
-            let mes0HourString = "0" + mesHourString
-            timeString = " " + mes0HourString + ":" + mesMinuteString
-        } else {
-            timeString = " " + mesHourString + ":" + mesMinuteString
+            mesHourString = "0" + mesHourString
         }
+        //Time: XX:0X
+        if (timeInt/100-100*(timeInt/10000))/10 == 0{
+            mesMinuteString = "0" + mesMinuteString
+        }
+        
+        timeString = " " + mesHourString + ":" + mesMinuteString
         
 //        //If in same Day, Present Time directly
         if dateTodayString == dateString {
@@ -171,4 +174,6 @@ class MessageListTableViewController: UITableViewController {
         let fromTo = A + " to " + B
         return fromTo
     }
+    
+    
 }
