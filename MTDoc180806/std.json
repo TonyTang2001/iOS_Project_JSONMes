@@ -1,0 +1,33 @@
+{
+    "stdChat" : 3,
+    
+    "stdMes" : [
+                {
+                "Num" : 1,
+                "from" : "Tony",
+                "to" : "Zed",
+                "type" : "textMes",
+                "time" : 201808071318,
+                "content" : "你在干嘛"
+                },
+                
+                {
+                "Num" : 2,
+                "from" : "Zed",
+                "to" : "Tony",
+                "type" : "textMes",
+                "time" : 201808071318,
+                "content" : "我在吃饭"
+                },
+                
+                {
+                    "Num" : 3,
+                    "from" : "Zed",
+                    "to" : "Tony",
+                    "type" : "textMes",
+                    "time" : 201808071318,
+                    "content" : "你呢"
+                }
+                
+                ]
+}
