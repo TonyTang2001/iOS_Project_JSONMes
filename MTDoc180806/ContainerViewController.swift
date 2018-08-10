@@ -36,6 +36,8 @@ class ContainerViewController: UIViewController {
         tapper.cancelsTouchesInView = false
         view.addGestureRecognizer(tapper)
         
+        
+        
     }
 
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -118,6 +120,7 @@ class ContainerViewController: UIViewController {
         var url = "http://39.104.90.230/webChat/?from=" + fromForUrl + "&&to=" + toForUrl
         url += "&&content=" + contentForUrl! + "&&type=" + typeForUrl
         print(url)
+        
         Alamofire.request(url).responseJSON { response in
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftEntryKit
 
 struct WebChat: Decodable {
     let stdChat: Int
@@ -61,6 +62,7 @@ class MessageListTableViewController: UITableViewController {
         tableView.reloadData()
         
         tableView.refreshControl = refresher
+        
     }
 
     func parsingJSON() {
