@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftEntryKit
 
 class ContainerViewController: UIViewController {
 
@@ -24,6 +25,7 @@ class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
 //        messageNum = messagenum + 1
         
@@ -134,7 +136,7 @@ class ContainerViewController: UIViewController {
                 print("Data: \(utf8Text)") // original server data as UTF8 string
             }
         }
-            
+        
         inputTF.text = ""
         
     }
